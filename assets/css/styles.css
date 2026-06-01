@@ -601,7 +601,16 @@ h1, h2, h3, h4 {
   font-size: 12px;
   color: var(--text-muted);
   font-family: 'JetBrains Mono', monospace;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
+}
+
+.card__ytd {
+  font-size: 10px;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
 }
 
 .card__stats {
