@@ -86,6 +86,14 @@ h1, h2, h3, h4 {
   box-shadow: 0 1px 24px rgba(4, 44, 83, 0.07);
 }
 
+/* Nav text is white when sitting over the dark hero (before scroll) */
+.nav:not(.scrolled) .nav__links a { color: rgba(230, 241, 251, 0.75); }
+.nav:not(.scrolled) .nav__links a:hover { color: var(--white); }
+.nav:not(.scrolled) .nav__links a.active { color: var(--light-blue); }
+.nav:not(.scrolled) .nav__wordmark { color: var(--white); }
+.nav:not(.scrolled) .nav__monogram { color: var(--light-blue); border-color: var(--light-blue); }
+.nav:not(.scrolled) .nav__hamburger span { background: var(--white); }
+
 .nav__inner {
   max-width: 1280px;
   margin: 0 auto;
@@ -252,6 +260,10 @@ h1, h2, h3, h4 {
 
 .footer__brand .nav__logo { margin-bottom: 16px; }
 
+/* Footer reuses .nav__logo — override colors for dark background */
+.footer__brand .nav__wordmark { color: var(--off-white); }
+.footer__brand .nav__monogram { color: var(--light-blue); border-color: var(--light-blue); }
+
 .footer__tagline {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
@@ -308,7 +320,7 @@ h1, h2, h3, h4 {
 
 .footer__copyright {
   font-size: 12px;
-  color: rgba(170, 170, 170, 0.5);
+  color: rgba(133, 183, 235, 0.45);
 }
 
 /* ─── BUTTONS ────────────────────────────────────────────────────────────── */
@@ -588,9 +600,9 @@ h1, h2, h3, h4 {
   margin-bottom: 20px;
 }
 
-.card__badge--flagship { background: rgba(201, 168, 76, 0.15); color: var(--gold); border: 1px solid rgba(201, 168, 76, 0.3); }
-.card__badge--risk-on  { background: rgba(133, 183, 235, 0.12); color: var(--light-blue); border: 1px solid var(--card-border); }
-.card__badge--risk-off { background: rgba(46, 204, 113, 0.1); color: var(--success); border: 1px solid rgba(46, 204, 113, 0.2); }
+.card__badge--flagship { background: rgba(201, 168, 76, 0.15); color: #8B6914; border: 1px solid rgba(201, 168, 76, 0.3); }
+.card__badge--risk-on  { background: rgba(24, 95, 165, 0.1); color: var(--accent); border: 1px solid rgba(24, 95, 165, 0.2); }
+.card__badge--risk-off { background: rgba(26, 158, 92, 0.1); color: #136B3C; border: 1px solid rgba(26, 158, 92, 0.25); }
 
 .card h3 {
   font-size: 26px;
@@ -631,7 +643,7 @@ h1, h2, h3, h4 {
 
 .card__stat span {
   font-family: 'JetBrains Mono', monospace;
-  color: var(--light-blue);
+  color: var(--accent);
   font-weight: 500;
 }
 
@@ -738,7 +750,7 @@ h1, h2, h3, h4 {
 
 .tab-btn.active { color: var(--text-primary); }
 .tab-btn.active::after { transform: scaleX(1); }
-.tab-btn:hover { color: var(--off-white); }
+.tab-btn:hover { color: var(--text-primary); }
 
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
@@ -792,14 +804,13 @@ h1, h2, h3, h4 {
 }
 
 .chart-card h3 {
-  font-size: 16px;
+  font-size: 11px;
   font-family: 'DM Sans', sans-serif;
   font-weight: 500;
-  color: var(--off-white);
+  color: var(--text-muted);
   margin-bottom: 24px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  font-size: 11px;
 }
 
 .chart-card canvas {
@@ -851,6 +862,12 @@ h1, h2, h3, h4 {
   color: var(--accent);
   font-size: 13px;
 }
+
+/* ─── ABOUT: DARK TIMELINE SECTION ──────────────────────────────────────── */
+.timeline-dark .eyebrow { color: var(--light-blue); }
+.timeline-dark h2 { color: var(--white); }
+.timeline-dark .timeline__content h3 { color: var(--white); }
+.timeline-dark .timeline__content p { color: rgba(230, 241, 251, 0.75); }
 
 /* ─── ABOUT PAGE ─────────────────────────────────────────────────────────── */
 .mission-block {
@@ -945,10 +962,12 @@ h1, h2, h3, h4 {
   padding: calc(var(--nav-height) + 40px) 32px 80px;
   text-align: center;
   position: relative;
+  background: var(--bg-dark);
 }
 
-.shop-hero h1 { font-size: clamp(44px, 7vw, 80px); margin: 16px 0 20px; }
-.shop-hero p  { font-size: 18px; color: rgba(230, 241, 251, 0.65); max-width: 480px; margin: 0 auto 48px; }
+.shop-hero .eyebrow { color: var(--light-blue); }
+.shop-hero h1 { font-size: clamp(44px, 7vw, 80px); margin: 16px 0 20px; color: var(--white); }
+.shop-hero p  { font-size: 18px; color: rgba(230, 241, 251, 0.75); max-width: 480px; margin: 0 auto 48px; }
 
 .waitlist-form {
   display: flex;
