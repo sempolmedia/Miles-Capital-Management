@@ -21,6 +21,9 @@ function initNav() {
 
   if (!nav) return;
 
+  // Set correct state on initial load (handles back-button scroll restoration)
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
