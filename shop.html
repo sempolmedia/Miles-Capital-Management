@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — Miles Capital Management</title>
+  <meta name="description" content="Access packages for Miles Capital Management coming soon. Join the waitlist.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="shop">
+
+  <!-- Navigation -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Miles Capital Management home">
+        <div class="nav__monogram" aria-hidden="true">MCM</div>
+        <span class="nav__wordmark">Miles Capital Management</span>
+      </a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="performance.html">Performance</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="shop.html" class="active">Shop</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="nav__cta">Get Access</a>
+      <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav__overlay" role="dialog" aria-label="Navigation menu">
+    <a href="index.html">Home</a>
+    <a href="performance.html">Performance</a>
+    <a href="about.html">About</a>
+    <a href="shop.html" class="active">Shop</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="nav__cta">Get Access</a>
+  </div>
+
+  <main>
+    <section class="shop-hero grain" aria-labelledby="shop-heading">
+      <p class="eyebrow">Coming Soon</p>
+      <h1 id="shop-heading" class="font-display">Access Miles Capital Management</h1>
+      <p>Exclusive access packages are being prepared. Join the waitlist to be notified first.</p>
+
+      <!-- FORMSPREE: Replace YOUR_FORM_ID below -->
+      <form class="waitlist-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" aria-label="Waitlist signup">
+        <input
+          type="email"
+          name="email"
+          placeholder="Your email address"
+          required
+          aria-label="Email address"
+          autocomplete="email"
+        >
+        <button type="submit" class="btn btn--filled">Join Waitlist</button>
+      </form>
+
+      <!-- Ghost product cards (locked, blurred scaffold) -->
+      <div class="ghost-cards" aria-hidden="true">
+        <div class="ghost-card">
+          <p class="ghost-card__badge">Starter</p>
+          <h3 class="font-display">Starter Access</h3>
+          <p class="ghost-card__price font-mono">$—</p>
+          <ul>
+            <li>Single strategy access</li>
+            <li>Monthly reporting</li>
+            <li>Email support</li>
+            <li>Introductory allocation</li>
+          </ul>
+        </div>
+        <div class="ghost-card" style="position:relative;">
+          <div class="most-popular-badge">Most Popular</div>
+          <p class="ghost-card__badge">Pro</p>
+          <h3 class="font-display">Pro Access</h3>
+          <p class="ghost-card__price font-mono">$—</p>
+          <ul>
+            <li>All three strategies</li>
+            <li>Weekly reporting</li>
+            <li>Priority support</li>
+            <li>Enhanced allocation</li>
+            <li>Performance dashboard</li>
+          </ul>
+        </div>
+        <div class="ghost-card">
+          <p class="ghost-card__badge">Institutional</p>
+          <h3 class="font-display">Institutional</h3>
+          <p class="ghost-card__price font-mono">$—</p>
+          <ul>
+            <li>Custom strategy config</li>
+            <li>Daily reporting</li>
+            <li>Dedicated manager</li>
+            <li>Institutional allocation</li>
+            <li>Bespoke onboarding</li>
+          </ul>
+        </div>
+
+        <!-- Lock icons overlaid on blurred cards -->
+        <div class="ghost-cards__overlay">
+          <div class="ghost-lock">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="5" y="11" width="14" height="10" rx="2"/>
+              <path d="M8 11V7a4 4 0 018 0v4"/>
+            </svg>
+            <span>Locked</span>
+          </div>
+          <div class="ghost-lock">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="5" y="11" width="14" height="10" rx="2"/>
+              <path d="M8 11V7a4 4 0 018 0v4"/>
+            </svg>
+            <span>Locked</span>
+          </div>
+          <div class="ghost-lock">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="5" y="11" width="14" height="10" rx="2"/>
+              <path d="M8 11V7a4 4 0 018 0v4"/>
+            </svg>
+            <span>Locked</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <div class="nav__logo">
+          <div class="nav__monogram">MCM</div>
+          <span class="nav__wordmark">Miles Capital Management</span>
+        </div>
+        <p class="footer__tagline">Systematic Trading. Precision Execution.</p>
+      </div>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="performance.html">Performance</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="footer__right">
+        <p class="footer__slogan">"Systematic Trading.<br>Precision Execution."</p>
+      </div>
+    </div>
+    <div class="footer__bottom" style="max-width:1280px;margin:0 auto;padding-left:32px;padding-right:32px;">
+      <p class="footer__legal"><em>Past performance is not indicative of future results. Trading Nasdaq futures involves substantial risk of loss and is not suitable for all investors. Miles Capital Management is not a registered investment adviser.</em></p>
+      <p class="footer__copyright">© 2026 Miles Capital Management. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
