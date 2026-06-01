@@ -89,7 +89,6 @@ function initCountUps(container = document) {
 function initHome() {
   initHeroCanvas();
   initHeroAnims();
-  initMacbook();
   initStrategyCards();
   initEdgeSection();
   initCountUps();
@@ -151,48 +150,6 @@ function initHeroAnims() {
     .to('.stats-bar',      { opacity: 1, duration: 0.8 }, 0.85);
 }
 
-// ─── HOME: MACBOOK SCROLL ──────────────────────────────────────────────────────
-function initMacbook() {
-  const isMobile = window.innerWidth <= 768;
-  if (isMobile) {
-    // Mobile: just fade in
-    const wrap = document.querySelector('.macbook-wrap');
-    const terminal = document.querySelector('.terminal');
-    if (wrap) { wrap.style.opacity = '1'; wrap.style.transform = 'scale(1)'; }
-    if (terminal) terminal.style.opacity = '1';
-    return;
-  }
-
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const wrap = document.querySelector('.macbook-wrap');
-  const terminal = document.querySelector('.terminal');
-  if (!wrap || !terminal) return;
-
-  gsap.set(wrap, { scale: 0.35, opacity: 0 });
-
-  ScrollTrigger.create({
-    trigger: '.macbook-pin',
-    start: 'top top',
-    end: 'bottom bottom',
-    pin: '.macbook-sticky',
-    scrub: 1,
-    onUpdate: (self) => {
-      const p = self.progress;
-      if (p < 0.6) {
-        const sub = p / 0.6;
-        gsap.set(wrap, { scale: 0.35 + (0.65 * sub), opacity: sub });
-        gsap.set(terminal, { opacity: 0 });
-      } else {
-        gsap.set(wrap, { scale: 1, opacity: 1 });
-        const sub = (p - 0.6) / 0.4;
-        gsap.set(terminal, { opacity: sub });
-      }
-    }
-  });
-}
 
 // ─── HOME: STRATEGY CARDS ──────────────────────────────────────────────────────
 function initStrategyCards() {
