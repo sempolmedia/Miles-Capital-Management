@@ -321,11 +321,11 @@ const chartDefaults = {
   plugins: {
     legend: { display: false },
     tooltip: {
-      backgroundColor: '#0A3D6B',
-      borderColor: 'rgba(133,183,235,0.15)',
+      backgroundColor: '#042C53',
+      borderColor: 'rgba(24,95,165,0.2)',
       borderWidth: 1,
       titleColor: '#FFFFFF',
-      bodyColor: '#E6F1FB',
+      bodyColor: '#85B7EB',
       titleFont: { family: 'DM Sans', size: 12 },
       bodyFont: { family: 'JetBrains Mono', size: 12 },
       padding: 12,
@@ -333,12 +333,12 @@ const chartDefaults = {
   },
   scales: {
     x: {
-      grid: { color: 'rgba(133,183,235,0.06)', drawBorder: false },
-      ticks: { color: '#aaaaaa', font: { family: 'DM Sans', size: 11 } },
+      grid: { color: 'rgba(24,95,165,0.07)', drawBorder: false },
+      ticks: { color: '#7A95B0', font: { family: 'DM Sans', size: 11 } },
     },
     y: {
-      grid: { color: 'rgba(133,183,235,0.06)', drawBorder: false },
-      ticks: { color: '#aaaaaa', font: { family: 'DM Sans', size: 11 } },
+      grid: { color: 'rgba(24,95,165,0.07)', drawBorder: false },
+      ticks: { color: '#7A95B0', font: { family: 'DM Sans', size: 11 } },
     },
   },
 };
