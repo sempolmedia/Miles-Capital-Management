@@ -66,7 +66,8 @@ function countUp(el, target, duration = 1500, prefix = '', suffix = '') {
     const progress = Math.min(elapsed / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
     const current = startVal + (target - startVal) * eased;
-    el.textContent = prefix + current.toFixed(decimals) + suffix;
+    const formatted = current.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    el.textContent = prefix + formatted + suffix;
     if (progress < 1) requestAnimationFrame(update);
   }
   requestAnimationFrame(update);
