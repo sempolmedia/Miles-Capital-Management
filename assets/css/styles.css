@@ -804,6 +804,11 @@ h1, h2, h3, h4 {
 .stat-cell__value.negative { color: var(--danger); }
 
 /* ─── SHARPE CALLOUT ─────────────────────────────────────────────────────── */
+.sharpe-section {
+  padding: 0 32px 0;
+  max-width: 1280px;
+  margin: 0 auto;
+}
 .sharpe-callout {
   background: var(--bg-dark);
   border: 1px solid rgba(133, 183, 235, 0.15);
