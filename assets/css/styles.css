@@ -1206,6 +1206,37 @@ h1, h2, h3, h4 {
 }
 
 /* ─── CONTACT PAGE ───────────────────────────────────────────────────────── */
+.form-outage {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: rgba(192, 57, 43, 0.08);
+  border: 1px solid rgba(192, 57, 43, 0.25);
+  border-radius: 2px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+  color: var(--danger);
+}
+
+.form-outage svg { flex-shrink: 0; margin-top: 2px; }
+
+.form-outage__title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--danger);
+}
+
+.form-outage__text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.form-outage__text a {
+  color: var(--accent);
+  text-decoration: underline;
+}
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
