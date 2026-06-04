@@ -58,16 +58,22 @@
       <!-- Left: Contact info -->
       <div class="contact-info">
         <h2>Contact</h2>
-        <!-- TODO: Replace with real email address -->
-        <a href="mailto:test@gmail.com" class="contact-info__email">test@gmail.com</a>
+        <a href="mailto:info@milescapitalmanagement.com" class="contact-info__email">info@milescapitalmanagement.com</a>
         <p>We keep access limited. Fill in the form and we'll take a look. Every application gets read personally before we respond.</p>
         <p class="contact-info__small">We do not offer financial advice. All trading involves risk.</p>
       </div>
 
       <!-- Right: Application form -->
       <div class="contact-form">
-        <!-- FORMSPREE: Replace YOUR_FORM_ID below -->
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate aria-label="Access application form">
+        <div class="form-outage" role="alert">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div>
+            <p class="form-outage__title">Form temporarily unavailable</p>
+            <p class="form-outage__text">We're experiencing a temporary issue with our application form. In the meantime, please reach us directly at <a href="mailto:info@milescapitalmanagement.com">info@milescapitalmanagement.com</a></p>
+          </div>
+        </div>
+
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate aria-label="Access application form" style="opacity:0.4;pointer-events:none;">
 
           <div class="form-row">
             <label for="name">Full Name</label>
@@ -78,6 +84,7 @@
               placeholder="Your full name"
               required
               autocomplete="name"
+              disabled
             >
           </div>
 
@@ -90,12 +97,13 @@
               placeholder="your@email.com"
               required
               autocomplete="email"
+              disabled
             >
           </div>
 
           <div class="form-row">
             <label for="experience">Trading Experience</label>
-            <select id="experience" name="experience" required>
+            <select id="experience" name="experience" required disabled>
               <option value="" disabled selected>Select level</option>
               <option value="beginner">Beginner</option>
               <option value="intermediate">Intermediate</option>
@@ -111,16 +119,17 @@
               name="message"
               placeholder="Tell us about your trading background or any questions you have."
               rows="5"
+              disabled
             ></textarea>
           </div>
 
-          <button type="submit" class="btn btn--filled" style="width:100%;justify-content:center;">Apply for Access</button>
+          <button type="submit" class="btn btn--filled" style="width:100%;justify-content:center;" disabled>Apply for Access</button>
 
           <div class="form-message success" role="status" aria-live="polite">
             Application received. We'll be in touch shortly.
           </div>
           <div class="form-message error" role="alert" aria-live="assertive">
-            Something went wrong. Please email us directly at <a href="mailto:test@gmail.com" style="color:var(--danger);text-decoration:underline;">test@gmail.com</a>
+            Something went wrong. Please email us directly at <a href="mailto:info@milescapitalmanagement.com" style="color:var(--danger);text-decoration:underline;">info@milescapitalmanagement.com</a>
           </div>
 
         </form>
