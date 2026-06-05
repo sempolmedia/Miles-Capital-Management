@@ -729,6 +729,58 @@ h1, h2, h3, h4 {
   margin-bottom: 40px;
 }
 
+/* ─── LIVE STATS BANNER ──────────────────────────────────────────────────── */
+.live-stats-banner {
+  background: var(--bg-dark);
+  border: 1px solid rgba(133,183,235,0.15);
+  border-radius: 2px;
+  padding: 32px 40px;
+  margin-bottom: 56px;
+}
+
+.live-stats-banner__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(133,183,235,0.1);
+  border-radius: 1px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.live-stat {
+  background: var(--bg-dark);
+  padding: 24px 28px;
+}
+
+.live-stat__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(133,183,235,0.5);
+  margin-bottom: 10px;
+}
+
+.live-stat__value {
+  font-size: clamp(20px, 3vw, 28px);
+  color: var(--white);
+  font-weight: 500;
+}
+
+.live-stat__value.positive { color: var(--success); }
+
+.live-stat__updated {
+  font-size: 11px;
+  color: rgba(133,183,235,0.35);
+  text-align: right;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .live-stats-banner__grid { grid-template-columns: 1fr; }
+  .live-stats-banner { padding: 24px; }
+}
+
 /* ─── PERFORMANCE PAGE ───────────────────────────────────────────────────── */
 .tabs {
   display: flex;
