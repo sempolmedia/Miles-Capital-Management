@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Miles Capital Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #042C53;
+      --bg-card: #0A3D6B;
+      --bg-dark: #020F1E;
+      --accent: #85B7EB;
+      --accent-dark: #185FA5;
+      --white: #FFFFFF;
+      --off-white: #EFF6FF;
+      --text-muted: rgba(133,183,235,0.6);
+      --border: rgba(133,183,235,0.15);
+      --success: #1A9E5C;
+      --danger: #C0392B;
+      --green: #1EDD7E;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* ── LOGIN ── */
+    .login-wrap {
+      width: 100%;
+      max-width: 420px;
+    }
+    .login-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 48px;
+      justify-content: center;
+    }
+    .login-monogram {
+      width: 40px; height: 40px;
+      border: 1px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; font-weight: 600;
+      color: var(--accent);
+    }
+    .login-wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .login-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 40px;
+      border-radius: 2px;
+    }
+    .login-card h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .login-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .field { margin-bottom: 20px; }
+    .field label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .field input {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 12px 16px;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input:focus { border-color: var(--accent); }
+    .field input::placeholder { color: rgba(133,183,235,0.35); }
+    .btn-primary {
+      width: 100%;
+      background: var(--accent-dark);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 500;
+      padding: 13px;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .btn-primary:hover { background: var(--accent); color: var(--bg); }
+    .login-error {
+      display: none;
+      background: rgba(192,57,43,0.1);
+      border: 1px solid rgba(192,57,43,0.3);
+      color: #E74C3C;
+      font-size: 13px;
+      padding: 10px 14px;
+      border-radius: 2px;
+      margin-top: 16px;
+    }
+
+    /* ── DASHBOARD ── */
+    .dashboard { display: none; width: 100%; max-width: 960px; }
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .dash-header .login-logo { margin-bottom: 0; justify-content: flex-start; }
+    .dash-meta { text-align: right; }
+    .dash-meta p { font-size: 12px; color: var(--text-muted); }
+    .dash-meta .last-updated { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); margin-top: 4px; }
+    .btn-logout {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-logout:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── TERMINAL ── */
+    .terminal {
+      position: relative;
+      background: var(--bg-dark);
+      border: 1px solid rgba(133,183,235,0.2);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .terminal::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+    .terminal__topbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(133,183,235,0.12);
+      background: rgba(133,183,235,0.04);
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+    }
+    .terminal__live-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--green);
+      letter-spacing: 0.08em;
+      background: rgba(30,221,126,0.08);
+      border: 1px solid rgba(30,221,126,0.25);
+      padding: 4px 10px;
+      flex-shrink: 0;
+    }
+    .terminal__pulse-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      display: inline-block;
+      animation: termPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes termPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.75); }
+    }
+    .terminal__system-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: rgba(133,183,235,0.5);
+      letter-spacing: 0.06em;
+      flex: 1;
+    }
+    .terminal__clock {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: rgba(133,183,235,0.45);
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .terminal__main {
+      padding: 32px 28px 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .terminal__stats-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 0;
+      margin-bottom: 28px;
+    }
+    .terminal__stat { padding: 0 24px; }
+    .terminal__stat:first-child { padding-left: 0; }
+    .terminal__stat:last-child { padding-right: 0; }
+    .terminal__stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(133,183,235,0.45);
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .terminal__stat-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .terminal__stat-val--green { color: var(--green); }
+    .terminal__stat-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(133,183,235,0.4);
+      letter-spacing: 0.06em;
+    }
+    .terminal__sep {
+      width: 1px;
+      background: rgba(133,183,235,0.1);
+      margin: 0 4px;
+    }
+    .terminal__footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(133,183,235,0.08);
+    }
+    .terminal__status-strip {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .terminal__status-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(133,183,235,0.5);
+      letter-spacing: 0.05em;
+    }
+    .terminal__status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .terminal__status-dot--green { background: var(--green); box-shadow: 0 0 5px var(--green); }
+    .terminal__status-dot--blue  { background: var(--accent); box-shadow: 0 0 5px var(--accent); }
+    .terminal__uptime {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(133,183,235,0.4);
+      letter-spacing: 0.06em;
+    }
+    .terminal__corner {
+      position: absolute;
+      width: 12px; height: 12px;
+      z-index: 3;
+    }
+    .terminal__corner--tl { top: 0; left: 0; border-top: 2px solid rgba(133,183,235,0.4); border-left: 2px solid rgba(133,183,235,0.4); }
+    .terminal__corner--tr { top: 0; right: 0; border-top: 2px solid rgba(133,183,235,0.4); border-right: 2px solid rgba(133,183,235,0.4); }
+    .terminal__corner--bl { bottom: 0; left: 0; border-bottom: 2px solid rgba(133,183,235,0.4); border-left: 2px solid rgba(133,183,235,0.4); }
+    .terminal__corner--br { bottom: 0; right: 0; border-bottom: 2px solid rgba(133,183,235,0.4); border-right: 2px solid rgba(133,183,235,0.4); }
+
+    /* ── EDIT CARD ── */
+    .edit-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 40px;
+      border-radius: 2px;
+    }
+    .edit-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+    .edit-card > p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .fields-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .field-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+    .save-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn-save {
+      background: var(--accent-dark);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 500;
+      padding: 13px 32px;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-save:hover { background: var(--accent); color: var(--bg); }
+    .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+    .save-msg { font-size: 13px; display: none; }
+    .save-msg.ok { color: var(--success); }
+    .save-msg.err { color: var(--danger); }
+
+    @media (max-width: 700px) {
+      .terminal__stats-row { grid-template-columns: 1fr; }
+      .terminal__sep { display: none; }
+      .terminal__stat { padding: 16px 0; border-bottom: 1px solid rgba(133,183,235,0.08); }
+      .terminal__stat:last-child { border-bottom: none; }
+      .fields-grid { grid-template-columns: 1fr; }
+      .login-card { padding: 28px; }
+      .edit-card { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="login-wrap" id="loginWrap">
+    <div class="login-logo">
+      <div class="login-monogram">MCM</div>
+      <span class="login-wordmark">Miles Capital Management</span>
+    </div>
+    <div class="login-card">
+      <h1>Admin Login</h1>
+      <p>Restricted access. Enter your credentials to continue.</p>
+      <form id="loginForm">
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" autocomplete="username" placeholder="Username" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" autocomplete="current-password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn-primary">Sign In</button>
+        <div class="login-error" id="loginError">Invalid username or password.</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard" id="dashboard">
+    <div class="dash-header">
+      <div class="login-logo">
+        <div class="login-monogram">MCM</div>
+        <span class="login-wordmark">Miles Capital Management</span>
+      </div>
+      <div class="dash-meta">
+        <p>Logged in as <strong>jackm</strong></p>
+        <p class="last-updated" id="lastUpdated">Last updated: —</p>
+      </div>
+      <button class="btn-logout" id="logoutBtn">Sign Out</button>
+    </div>
+
+    <!-- Terminal -->
+    <div class="terminal">
+      <div class="terminal__topbar">
+        <div class="terminal__live-badge">
+          <span class="terminal__pulse-dot"></span>
+          <span>LIVE</span>
+        </div>
+        <p class="terminal__system-id">MCM TRADING SYSTEM &nbsp;·&nbsp; FUND METRICS &nbsp;·&nbsp; YTD 2026</p>
+        <p class="terminal__clock" id="termClock"></p>
+      </div>
+
+      <div class="terminal__main">
+        <div class="terminal__stats-row">
+          <div class="terminal__stat">
+            <p class="terminal__stat-label">// CAPITAL_UNDER_MGMT</p>
+            <p class="terminal__stat-val" id="termCUM">—</p>
+            <p class="terminal__stat-sub">USD · Total AUM</p>
+          </div>
+          <div class="terminal__sep" aria-hidden="true"></div>
+          <div class="terminal__stat">
+            <p class="terminal__stat-label">// PNL_THIS_MONTH</p>
+            <p class="terminal__stat-val terminal__stat-val--green" id="termMonth">—</p>
+            <p class="terminal__stat-sub" id="termMonthSub">USD · Jun 2026</p>
+          </div>
+          <div class="terminal__sep" aria-hidden="true"></div>
+          <div class="terminal__stat">
+            <p class="terminal__stat-label">// PNL_YEAR_TO_DATE</p>
+            <p class="terminal__stat-val terminal__stat-val--green" id="termYTD">—</p>
+            <p class="terminal__stat-sub">USD · YTD 2026</p>
+          </div>
+        </div>
+
+        <div class="terminal__footer-row">
+          <div class="terminal__status-strip">
+            <span class="terminal__status-item">
+              <span class="terminal__status-dot terminal__status-dot--green"></span>
+              ALGORITHM&nbsp;ACTIVE
+            </span>
+            <span class="terminal__status-item">
+              <span class="terminal__status-dot terminal__status-dot--blue"></span>
+              NASDAQ&nbsp;FUTURES&nbsp;·&nbsp;NQ
+            </span>
+            <span class="terminal__status-item">
+              <span class="terminal__status-dot terminal__status-dot--blue"></span>
+              QUANTCONNECT&nbsp;VERIFIED
+            </span>
+            <span class="terminal__status-item">
+              <span class="terminal__status-dot terminal__status-dot--green"></span>
+              3&nbsp;STRATEGIES&nbsp;RUNNING
+            </span>
+          </div>
+          <p class="terminal__uptime">SYS_UPTIME: <span id="termUptime">00:00:00</span></p>
+        </div>
+      </div>
+
+      <span class="terminal__corner terminal__corner--tl" aria-hidden="true"></span>
+      <span class="terminal__corner terminal__corner--tr" aria-hidden="true"></span>
+      <span class="terminal__corner terminal__corner--bl" aria-hidden="true"></span>
+      <span class="terminal__corner terminal__corner--br" aria-hidden="true"></span>
+    </div>
+
+    <!-- Edit form -->
+    <div class="edit-card">
+      <h2>Update Live Statistics</h2>
+      <p>Enter new values and click Save to update the terminal above.</p>
+      <div class="fields-grid">
+        <div class="field">
+          <label for="inputCUM">Capital Under Management</label>
+          <input type="text" id="inputCUM" placeholder="e.g. 497000">
+          <p class="field-hint">USD (numbers only)</p>
+        </div>
+        <div class="field">
+          <label for="inputMonth">PNL This Month</label>
+          <input type="text" id="inputMonth" placeholder="e.g. 12400">
+          <p class="field-hint">USD · use - for loss</p>
+        </div>
+        <div class="field">
+          <label for="inputYTD">PNL Year to Date</label>
+          <input type="text" id="inputYTD" placeholder="e.g. 135200">
+          <p class="field-hint">USD · use - for loss</p>
+        </div>
+      </div>
+      <div class="save-row">
+        <button class="btn-save" id="saveBtn">Save &amp; Publish</button>
+        <span class="save-msg ok" id="saveOk">Saved. Stats are now live.</span>
+        <span class="save-msg err" id="saveErr">Something went wrong. Try again.</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let credentials = null;
+
+    // Clock
+    function padZ(n) { return String(n).padStart(2,'0'); }
+    function updateClock() {
+      const el = document.getElementById('termClock');
+      if (!el) return;
+      const now = new Date();
+      el.textContent = padZ(now.getHours()) + ':' + padZ(now.getMinutes()) + ':' + padZ(now.getSeconds()) +
+        ' UTC' + (now.getTimezoneOffset() <= 0 ? '+' : '-') +
+        padZ(Math.abs(now.getTimezoneOffset() / 60)) + ':00';
+    }
+    updateClock(); setInterval(updateClock, 1000);
+
+    // Uptime
+    const t0 = Date.now();
+    function updateUptime() {
+      const el = document.getElementById('termUptime');
+      if (!el) return;
+      const s = Math.floor((Date.now() - t0) / 1000);
+      el.textContent = padZ(Math.floor(s/3600)) + ':' + padZ(Math.floor((s%3600)/60)) + ':' + padZ(s%60);
+    }
+    updateUptime(); setInterval(updateUptime, 1000);
+
+    function fmtCUM(val) {
+      if (val === null || val === undefined || val === '') return '—';
+      const num = parseFloat(val);
+      if (isNaN(num)) return '—';
+      return '$' + Math.abs(num).toLocaleString('en-US');
+    }
+
+    function fmtPNL(val) {
+      if (val === null || val === undefined || val === '') return '—';
+      const num = parseFloat(val);
+      if (isNaN(num)) return '—';
+      return (num < 0 ? '-$' : '+$') + Math.abs(num).toLocaleString('en-US');
+    }
+
+    function updateTerminal(stats) {
+      const cum = document.getElementById('termCUM');
+      const month = document.getElementById('termMonth');
+      const ytd = document.getElementById('termYTD');
+
+      cum.textContent = fmtCUM(stats.capitalUnderManagement);
+
+      const monthVal = parseFloat(stats.pnlMonth);
+      month.textContent = fmtPNL(stats.pnlMonth);
+      month.className = 'terminal__stat-val' + (monthVal < 0 ? ' terminal__stat-val--red' : ' terminal__stat-val--green');
+
+      const ytdVal = parseFloat(stats.pnlYTD);
+      ytd.textContent = fmtPNL(stats.pnlYTD);
+      ytd.className = 'terminal__stat-val' + (ytdVal < 0 ? ' terminal__stat-val--red' : ' terminal__stat-val--green');
+
+      if (stats.lastUpdated) {
+        const d = new Date(stats.lastUpdated);
+        document.getElementById('lastUpdated').textContent =
+          'Last updated: ' + d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) +
+          ' ' + d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+      }
+      document.getElementById('inputCUM').value = stats.capitalUnderManagement ?? '';
+      document.getElementById('inputMonth').value = stats.pnlMonth ?? '';
+      document.getElementById('inputYTD').value = stats.pnlYTD ?? '';
+    }
+
+    async function loadStats() {
+      try {
+        const res = await fetch('/api/stats');
+        if (res.ok) {
+          const data = await res.json();
+          updateTerminal(data);
+        } else {
+          // Fallback defaults when API not yet configured
+          updateTerminal({ capitalUnderManagement: 497000, pnlMonth: 44004, pnlYTD: 135222 });
+        }
+      } catch {
+        updateTerminal({ capitalUnderManagement: 497000, pnlMonth: 44004, pnlYTD: 135222 });
+      }
+    }
+
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value;
+      const errEl = document.getElementById('loginError');
+
+      // Try API auth first, fall back to hardcoded for offline/static mode
+      let authenticated = false;
+      try {
+        const res = await fetch('/api/admin/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: user, password: pass, validateOnly: true,
+            capitalUnderManagement: null, pnlMonth: null, pnlYTD: null })
+        });
+        authenticated = res.status !== 401;
+      } catch {
+        authenticated = (user === 'jackm' && pass === 'adminmiles');
+      }
+
+      if (!authenticated) {
+        errEl.style.display = 'block';
+        return;
+      }
+
+      credentials = { username: user, password: pass };
+      errEl.style.display = 'none';
+      document.getElementById('loginWrap').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.body.style.alignItems = 'flex-start';
+      document.body.style.paddingTop = '48px';
+      await loadStats();
+    });
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      credentials = null;
+      document.getElementById('loginWrap').style.display = 'flex';
+      document.getElementById('dashboard').style.display = 'none';
+      document.body.style.alignItems = 'center';
+      document.body.style.paddingTop = '24px';
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+    });
+
+    // Save
+    document.getElementById('saveBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('saveBtn');
+      const okMsg = document.getElementById('saveOk');
+      const errMsg = document.getElementById('saveErr');
+      okMsg.style.display = 'none';
+      errMsg.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Saving…';
+
+      const payload = {
+        username: credentials.username,
+        password: credentials.password,
+        capitalUnderManagement: document.getElementById('inputCUM').value || null,
+        pnlMonth: document.getElementById('inputMonth').value || null,
+        pnlYTD: document.getElementById('inputYTD').value || null,
+      };
+
+      let saved = false;
+      try {
+        const res = await fetch('/api/admin/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        saved = res.ok;
+      } catch { saved = false; }
+
+      if (saved) {
+        okMsg.style.display = 'inline';
+        await loadStats();
+      } else {
+        // Update terminal locally if API not available
+        updateTerminal({
+          capitalUnderManagement: payload.capitalUnderManagement,
+          pnlMonth: payload.pnlMonth,
+          pnlYTD: payload.pnlYTD,
+        });
+        okMsg.style.display = 'inline';
+        okMsg.textContent = 'Stats updated locally.';
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Save & Publish';
+    });
+  </script>
+</body>
+</html>
