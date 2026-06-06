@@ -766,43 +766,22 @@
       document.getElementById('inputYTD').value = stats.pnlYTD ?? '';
     }
 
-    async function loadStats() {
-      try {
-        const res = await fetch('/api/stats');
-        if (res.ok) {
-          const data = await res.json();
-          updateTerminal(data);
-        } else {
-          // Fallback defaults when API not yet configured
-          updateTerminal({ capitalUnderManagement: 497000, pnlMonth: 44004, pnlYTD: 135222 });
-        }
-      } catch {
-        updateTerminal({ capitalUnderManagement: 497000, pnlMonth: 44004, pnlYTD: 135222 });
+    function loadStats() {
+      const saved = localStorage.getItem('mcm_stats');
+      if (saved) {
+        try { updateTerminal(JSON.parse(saved)); return; } catch {}
       }
+      updateTerminal({ capitalUnderManagement: 497000, pnlMonth: 44004, pnlYTD: 135222 });
     }
 
     // Login
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const user = document.getElementById('username').value.trim();
       const pass = document.getElementById('password').value;
       const errEl = document.getElementById('loginError');
 
-      // Try API auth first, fall back to hardcoded for offline/static mode
-      let authenticated = false;
-      try {
-        const res = await fetch('/api/admin/save', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: user, password: pass, validateOnly: true,
-            capitalUnderManagement: null, pnlMonth: null, pnlYTD: null })
-        });
-        authenticated = res.status !== 401;
-      } catch {
-        authenticated = (user === 'jackm' && pass === 'adminmiles');
-      }
-
-      if (!authenticated) {
+      if (user !== 'jackm' || pass !== 'adminmiles') {
         errEl.style.display = 'block';
         return;
       }
@@ -813,7 +792,7 @@
       document.getElementById('dashboard').style.display = 'block';
       document.body.style.alignItems = 'flex-start';
       document.body.style.paddingTop = '48px';
-      await loadStats();
+      loadStats();
       setTimeout(() => renderChart('flagship'), 50);
     });
 
@@ -829,7 +808,7 @@
     });
 
     // Save
-    document.getElementById('saveBtn').addEventListener('click', async () => {
+    document.getElementById('saveBtn').addEventListener('click', () => {
       const btn = document.getElementById('saveBtn');
       const okMsg = document.getElementById('saveOk');
       const errMsg = document.getElementById('saveErr');
@@ -838,37 +817,17 @@
       btn.disabled = true;
       btn.textContent = 'Saving…';
 
-      const payload = {
-        username: credentials.username,
-        password: credentials.password,
+      const stats = {
         capitalUnderManagement: document.getElementById('inputCUM').value || null,
         pnlMonth: document.getElementById('inputMonth').value || null,
         pnlYTD: document.getElementById('inputYTD').value || null,
+        lastUpdated: new Date().toISOString(),
       };
 
-      let saved = false;
-      try {
-        const res = await fetch('/api/admin/save', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        saved = res.ok;
-      } catch { saved = false; }
-
-      if (saved) {
-        okMsg.style.display = 'inline';
-        await loadStats();
-      } else {
-        // Update terminal locally if API not available
-        updateTerminal({
-          capitalUnderManagement: payload.capitalUnderManagement,
-          pnlMonth: payload.pnlMonth,
-          pnlYTD: payload.pnlYTD,
-        });
-        okMsg.style.display = 'inline';
-        okMsg.textContent = 'Stats updated locally.';
-      }
+      localStorage.setItem('mcm_stats', JSON.stringify(stats));
+      updateTerminal(stats);
+      okMsg.style.display = 'inline';
+      okMsg.textContent = 'Saved.';
 
       btn.disabled = false;
       btn.textContent = 'Save & Publish';
