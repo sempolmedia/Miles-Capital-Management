@@ -21,6 +21,9 @@ function initNav() {
 
   if (!nav) return;
 
+  // Set correct state on initial load (handles back-button scroll restoration)
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
@@ -63,7 +66,8 @@ function countUp(el, target, duration = 1500, prefix = '', suffix = '') {
     const progress = Math.min(elapsed / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
     const current = startVal + (target - startVal) * eased;
-    el.textContent = prefix + current.toFixed(decimals) + suffix;
+    const formatted = current.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    el.textContent = prefix + formatted + suffix;
     if (progress < 1) requestAnimationFrame(update);
   }
   requestAnimationFrame(update);
@@ -89,7 +93,6 @@ function initCountUps(container = document) {
 function initHome() {
   initHeroCanvas();
   initHeroAnims();
-  initMacbook();
   initStrategyCards();
   initEdgeSection();
   initCountUps();
@@ -151,48 +154,6 @@ function initHeroAnims() {
     .to('.stats-bar',      { opacity: 1, duration: 0.8 }, 0.85);
 }
 
-// ─── HOME: MACBOOK SCROLL ──────────────────────────────────────────────────────
-function initMacbook() {
-  const isMobile = window.innerWidth <= 768;
-  if (isMobile) {
-    // Mobile: just fade in
-    const wrap = document.querySelector('.macbook-wrap');
-    const terminal = document.querySelector('.terminal');
-    if (wrap) { wrap.style.opacity = '1'; wrap.style.transform = 'scale(1)'; }
-    if (terminal) terminal.style.opacity = '1';
-    return;
-  }
-
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const wrap = document.querySelector('.macbook-wrap');
-  const terminal = document.querySelector('.terminal');
-  if (!wrap || !terminal) return;
-
-  gsap.set(wrap, { scale: 0.35, opacity: 0 });
-
-  ScrollTrigger.create({
-    trigger: '.macbook-pin',
-    start: 'top top',
-    end: 'bottom bottom',
-    pin: '.macbook-sticky',
-    scrub: 1,
-    onUpdate: (self) => {
-      const p = self.progress;
-      if (p < 0.6) {
-        const sub = p / 0.6;
-        gsap.set(wrap, { scale: 0.35 + (0.65 * sub), opacity: sub });
-        gsap.set(terminal, { opacity: 0 });
-      } else {
-        gsap.set(wrap, { scale: 1, opacity: 1 });
-        const sub = (p - 0.6) / 0.4;
-        gsap.set(terminal, { opacity: sub });
-      }
-    }
-  });
-}
 
 // ─── HOME: STRATEGY CARDS ──────────────────────────────────────────────────────
 function initStrategyCards() {
@@ -271,7 +232,38 @@ function initTabs() {
 const chartInstances = {};
 
 const chartData = {
+  // MCM Core — GH BE45 Refined: Net $44,004.98, WR 55%, DD 7.0%, RR 3.21
   'tab-flagship': {
+    equity: {
+      labels: ['Jan 1','Jan 15','Feb 1','Feb 15','Mar 1','Mar 15','Apr 1','Apr 15','May 1','May 15','Jun 1'],
+      values: [50000, 53200, 58600, 61400, 67800, 71200, 69400, 75800, 80200, 86600, 94005],
+    },
+    monthly: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+      values: [6.4, 10.2, 9.8, 5.6, 11.4, 8.8],
+    },
+    drawdown: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+      values: [0, -1.2, -2.4, -7.0, -3.8, -1.1],
+    },
+  },
+  // MCM Aggressive — Max120 T155 BE50: Net $59,073.16, WR 51%, DD 16.3%, RR 3.98
+  'tab-risk-on': {
+    equity: {
+      labels: ['Jan','Jan mid','Feb','Feb mid','Mar','Mar mid','Apr','Apr mid','May','May mid','Jun'],
+      values: [50000, 55400, 58200, 64800, 68600, 56200, 74400, 80600, 87200, 96400, 109073],
+    },
+    monthly: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+      values: [10.8, 14.2, 8.6, -6.4, 18.2, 16.7],
+    },
+    drawdown: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+      values: [0, -3.2, -6.8, -16.3, -8.4, -2.1],
+    },
+  },
+  // MCM Passive — A+ 1.5K: Net $32,144.84, WR 65%, DD 2.8%, Sharpe 5.705
+  'tab-risk-off': {
     equity: {
       labels: ['Jan 1','Jan 15','Feb 1','Feb 15','Mar 1','Mar 15','Apr 1','Apr 15','May 1','May 15','Jun 1'],
       values: [50000, 52400, 57800, 59200, 65100, 68400, 66800, 72300, 75600, 78900, 82144],
@@ -285,34 +277,6 @@ const chartData = {
       values: [0, -0.6, -1.1, -2.8, -1.4, -0.3],
     },
   },
-  'tab-risk-on': {
-    equity: {
-      labels: ['Jan','Jan mid','Feb','Feb mid','Mar','Mar mid','Apr','Apr mid','May','May mid','Jun'],
-      values: [50000, 53100, 54200, 58000, 60100, 53400, 65800, 68200, 70200, 74500, 77928],
-    },
-    monthly: {
-      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-      values: [8.4, 11.6, 9.4, -3.2, 8.7, 10.8],
-    },
-    drawdown: {
-      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-      values: [0, -2.1, -4.8, -11.3, -6.2, -1.4],
-    },
-  },
-  'tab-risk-off': {
-    equity: {
-      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-      values: [50000, 52100, 55400, 58200, 61800, 64650],
-    },
-    monthly: {
-      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-      values: [4.2, 6.6, 5.6, 4.1, 5.8, 3.0],
-    },
-    drawdown: {
-      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-      values: [0, -0.9, -1.8, -4.7, -2.1, -0.6],
-    },
-  },
 };
 
 const chartDefaults = {
@@ -321,11 +285,11 @@ const chartDefaults = {
   plugins: {
     legend: { display: false },
     tooltip: {
-      backgroundColor: '#0A3D6B',
-      borderColor: 'rgba(133,183,235,0.15)',
+      backgroundColor: '#042C53',
+      borderColor: 'rgba(24,95,165,0.2)',
       borderWidth: 1,
       titleColor: '#FFFFFF',
-      bodyColor: '#E6F1FB',
+      bodyColor: '#85B7EB',
       titleFont: { family: 'DM Sans', size: 12 },
       bodyFont: { family: 'JetBrains Mono', size: 12 },
       padding: 12,
@@ -333,12 +297,12 @@ const chartDefaults = {
   },
   scales: {
     x: {
-      grid: { color: 'rgba(133,183,235,0.06)', drawBorder: false },
-      ticks: { color: '#aaaaaa', font: { family: 'DM Sans', size: 11 } },
+      grid: { color: 'rgba(24,95,165,0.07)', drawBorder: false },
+      ticks: { color: '#7A95B0', font: { family: 'DM Sans', size: 11 } },
     },
     y: {
-      grid: { color: 'rgba(133,183,235,0.06)', drawBorder: false },
-      ticks: { color: '#aaaaaa', font: { family: 'DM Sans', size: 11 } },
+      grid: { color: 'rgba(24,95,165,0.07)', drawBorder: false },
+      ticks: { color: '#7A95B0', font: { family: 'DM Sans', size: 11 } },
     },
   },
 };

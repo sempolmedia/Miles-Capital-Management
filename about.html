@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Miles Capital Management</title>
+  <title>About | Miles Capital Management</title>
   <meta name="description" content="About Miles Capital Management. Systematic algorithmic trading built on mathematical precision and disciplined execution.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body data-page="about">
@@ -59,7 +60,7 @@
         <p class="eyebrow" style="margin-bottom:16px;">Mission</p>
         <h2 id="mission-heading" style="font-size:clamp(32px,4vw,48px);margin-bottom:24px;">One Belief. One System.</h2>
         <!-- REVIEW: Confirm copy with client before final publication -->
-        <p>MCM was built on a single belief: that disciplined, systematic execution will always outperform emotional decision-making over time. Every parameter in our strategy has been tested, validated, and stress-tested against years of Nasdaq futures data.</p>
+        <p>MCM started from a simple observation: traders who follow rules consistently outperform traders who improvise. So we built a system with no room for improvisation. Every entry, every exit, every position size is defined in advance and tested against years of real Nasdaq data before it ever goes live.</p>
       </div>
       <div aria-hidden="true">
         <svg viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;">
@@ -91,7 +92,7 @@
     <hr class="hairline" style="max-width:1280px;margin:0 auto 0;padding:0 32px;">
 
     <!-- How It Works -->
-    <section aria-labelledby="how-heading" style="background:var(--bg-dark);padding:80px 0;">
+    <section class="timeline-dark" aria-labelledby="how-heading" style="background:var(--bg-dark);padding:80px 0;">
       <div style="max-width:1280px;margin:0 auto;padding:0 32px;margin-bottom:48px;">
         <p class="eyebrow" style="margin-bottom:12px;">Process</p>
         <h2 id="how-heading" style="font-size:clamp(34px,4vw,52px);">How It Works</h2>
@@ -102,7 +103,7 @@
           <div class="timeline__content">
             <h3>Signal Detection</h3>
             <!-- REVIEW: Confirm technical accuracy of step descriptions with client -->
-            <p>The algorithm continuously monitors Nasdaq futures market conditions, waiting for a statistically defined setup.</p>
+            <p>The algorithm watches the Nasdaq around the clock, waiting for a specific set of conditions to line up. Most of the time, it does nothing. That's by design.</p>
           </div>
         </div>
         <div class="timeline__item">
@@ -110,7 +111,7 @@
           <div class="timeline__content">
             <h3>Risk Calculation</h3>
             <!-- REVIEW: Confirm technical accuracy with client -->
-            <p>Before any order is placed, position size is calculated relative to current equity to ensure no single trade risks more than a defined threshold.</p>
+            <p>Before anything is placed, the system works out the position size based on current equity. No single trade is allowed to risk more than a set amount. The math runs every time, without exception.</p>
           </div>
         </div>
         <div class="timeline__item">
@@ -118,7 +119,7 @@
           <div class="timeline__content">
             <h3>Automated Execution</h3>
             <!-- REVIEW: Confirm broker API details with client -->
-            <p>Orders are placed instantly via broker API with pre-set take profit and stop loss levels. Zero manual input.</p>
+            <p>The order goes in automatically through the broker API, complete with take profit and stop loss already set. Nobody touches it. Nobody needs to.</p>
           </div>
         </div>
         <div class="timeline__item">
@@ -126,7 +127,7 @@
           <div class="timeline__content">
             <h3>Position Management</h3>
             <!-- REVIEW: Confirm copy with client -->
-            <p>Once live, the trade runs on its own rules. No overrides. No second-guessing.</p>
+            <p>Once the trade is live, it runs on its own. The levels are set, the rules are locked in. There's nothing left to do but wait for the outcome.</p>
           </div>
         </div>
       </div>
@@ -141,15 +142,15 @@
       <div class="why-grid">
         <div class="why-item">
           <h3>No Emotional Bias</h3>
-          <p>Every decision is pre-defined by rules. Fear, greed, and hesitation are eliminated from the equation entirely.</p>
+          <p>The rules are written before the market opens. There's no room for fear, greed, or a bad day to influence the outcome.</p>
         </div>
         <div class="why-item">
           <h3>Millisecond Execution</h3>
-          <p>Orders are placed and managed at machine speed. No lag between signal and action.</p>
+          <p>When the signal fires, the order is already on its way. There's no delay, no hesitation, no missed entry.</p>
         </div>
         <div class="why-item">
           <h3>Consistent Rule Application</h3>
-          <p>The same conditions produce the same decisions every time. No variance, no exceptions.</p>
+          <p>The same setup always gets the same response. It doesn't matter what the news says or what the market did yesterday.</p>
         </div>
       </div>
     </section>
@@ -160,25 +161,25 @@
       <div class="section__header">
         <p class="eyebrow">Strategies</p>
         <h2 id="strat-heading">Three Variants. One Edge.</h2>
-        <p>Each strategy is calibrated for a distinct risk tolerance — same underlying system, different exposure profile.</p>
+        <p>All three run on the same core logic. The difference is how much risk each one takes on and how often it trades.</p>
       </div>
       <div class="strategies-about__grid">
         <div class="strategy-brief">
           <span class="card__badge card__badge--flagship" style="display:inline-block;margin-bottom:16px;">Flagship</span>
-          <h3>A+ 1.5K</h3>
-          <p>The primary strategy. Low-frequency, high-conviction entries validated across extended backtesting. Maximum Sharpe, minimum drawdown.</p>
+          <h3>MCM Core</h3>
+          <p>The main strategy. It doesn't trade that often, but when it does, the win rate and risk/reward speak for themselves. Best Sharpe of the three, lowest drawdown.</p>
           <a href="performance.html">View performance data →</a>
         </div>
         <div class="strategy-brief">
           <span class="card__badge card__badge--risk-on" style="display:inline-block;margin-bottom:16px;">Risk-On</span>
-          <h3>custom_goodhours_s30</h3>
-          <p>Elevated trade frequency for periods of sustained Nasdaq momentum. Higher potential returns with proportionally higher drawdown tolerance.</p>
+          <h3>MCM Aggressive</h3>
+          <p>Trades more often and takes on more risk. When the Nasdaq is running, this one catches more of it. The drawdown is higher, but so is the upside.</p>
           <a href="performance.html">View performance data →</a>
         </div>
         <div class="strategy-brief">
           <span class="card__badge card__badge--risk-off" style="display:inline-block;margin-bottom:16px;">Risk-Off</span>
-          <h3>Hybrid Pruned</h3>
-          <p>The conservative variant. Prioritises capital preservation and smoothness of returns. Suitable for lower-risk mandates.</p>
+          <h3>MCM Passive</h3>
+          <p>The conservative option. It trades less, keeps drawdown tight, and focuses on not losing money before worrying about making it.</p>
           <a href="performance.html">View performance data →</a>
         </div>
       </div>
@@ -186,8 +187,8 @@
 
     <!-- CTA -->
     <section class="cta-banner grain" aria-labelledby="about-cta-heading" style="margin-top:40px;">
-      <h2 id="about-cta-heading" class="font-display">See the Results in Detail.</h2>
-      <p>Explore verified performance data across all three strategies.</p>
+      <h2 id="about-cta-heading" class="font-display">The numbers are there. Go look.</h2>
+      <p>Full performance data for all three strategies, broken down trade by trade.</p>
       <a href="performance.html" class="btn btn--filled">View Performance</a>
     </section>
 
