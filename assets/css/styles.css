@@ -16,6 +16,8 @@
   --card-border: rgba(24, 95, 165, 0.12);
   --gold: #C9A84C;
   --nav-height: 72px;
+  --ticker-height: 34px;
+  --header-total: calc(var(--nav-height) + var(--ticker-height));
 }
 
 /* ─── RESET & BASE ───────────────────────────────────────────────────────── */
@@ -69,6 +71,22 @@ h1, h2, h3, h4 {
 }
 
 /* ─── NAVIGATION ─────────────────────────────────────────────────────────── */
+/* ── TICKER TAPE ── */
+.ticker-tape {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  z-index: 999;
+  border-bottom: 1px solid rgba(133,183,235,0.12);
+  background: rgba(2,15,30,0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.ticker-tape .tradingview-widget-container__widget {
+  height: 34px;
+}
+
 .nav {
   position: fixed;
   top: 0;
@@ -376,7 +394,7 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding-top: var(--nav-height);
+  padding-top: var(--header-total);
 }
 
 .hero--compact .hero__content {
@@ -1309,7 +1327,7 @@ h1, h2, h3, h4 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: calc(var(--nav-height) + 40px) 32px 80px;
+  padding: calc(var(--header-total) + 40px) 32px 80px;
   text-align: center;
   position: relative;
   background: var(--bg-dark);

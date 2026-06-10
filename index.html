@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Miles Capital Management | Algorithmic Trading</title>
-  <meta name="description" content="Miles Capital Management. Systematic algorithmic trading on Nasdaq futures. 64.29% annual return. Sharpe Ratio 5.705.">
+  <meta name="description" content="Miles Capital Management. Systematic algorithmic trading on futures markets. 64.29% annual return. Sharpe Ratio 5.705.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -34,6 +34,14 @@
     </div>
   </nav>
 
+  <!-- Live Market Ticker -->
+  <div class="tradingview-widget-container ticker-tape">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {"symbols":[{"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},{"proName":"FOREXCOM:DJI","title":"Dow Jones"},{"proName":"FOREXCOM:NSXUSD","title":"US 100"},{"proName":"TVC:GOLD","title":"Gold"},{"proName":"TVC:DXY","title":"US Dollar"},{"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},{"proName":"TVC:VIX","title":"Volatility Index"}],"showSymbolLogo":false,"isTransparent":true,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
+    </script>
+  </div>
+
   <!-- Mobile overlay -->
   <div class="nav__overlay" role="dialog" aria-label="Navigation menu">
     <a href="index.html" class="active">Home</a>
@@ -48,7 +56,7 @@
   <section class="hero--full grain" aria-label="Hero">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero__content">
-      <p class="eyebrow hero__eyebrow">Algorithmic Trading · Nasdaq Futures</p>
+      <p class="eyebrow hero__eyebrow">Algorithmic Trading · Futures Markets</p>
       <span class="font-display hero__h1">Miles Capital</span>
       <span class="font-display hero__h1--sub">Management</span>
       <p class="hero__tagline">Systematic Trading. Precision Execution.</p>
@@ -179,8 +187,8 @@
     <div class="edge-section">
       <div class="edge-text">
         <p class="eyebrow">The Edge</p>
-        <h2 id="edge-heading">A Mathematical Approach to the Nasdaq</h2>
-        <p>The MCM system looks for specific conditions in the Nasdaq before placing any trade. When those conditions show up, it acts. When they don't, it waits. Everything is defined upfront, tested thoroughly, and run live without interference.</p>
+        <h2 id="edge-heading">A Mathematical Approach to the Markets</h2>
+        <p>The MCM system looks for specific market conditions before placing any trade. When those conditions show up, it acts. When they don't, it waits. Everything is defined upfront, tested thoroughly, and run live without interference.</p>
         <!-- REVIEW: Confirm copy with client before final publication -->
         <a href="performance.html">Explore full performance data →</a>
       </div>
@@ -259,7 +267,7 @@
       </div>
     </div>
     <div class="footer__bottom" style="max-width:1280px;margin:0 auto;padding-left:32px;padding-right:32px;">
-      <p class="footer__legal"><em>Past performance is not indicative of future results. Trading Nasdaq futures involves substantial risk of loss and is not suitable for all investors. Miles Capital Management is not a registered investment adviser.</em></p>
+      <p class="footer__legal"><em>Past performance is not indicative of future results. Trading futures involves substantial risk of loss and is not suitable for all investors. Miles Capital Management is not a registered investment adviser.</em></p>
       <p class="footer__copyright">© 2026 Miles Capital Management. All rights reserved.</p>
     </div>
   </footer>
