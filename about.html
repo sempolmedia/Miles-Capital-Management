@@ -34,7 +34,23 @@
     </div>
   </nav>
 
-  <div class="nav__overlay" role="dialog" aria-label="Navigation menu">
+  <!-- Live Market Ticker -->
+  <div class="tradingview-widget-container ticker-tape">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {"symbols":[{"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},{"proName":"FOREXCOM:DJI","title":"Dow Jones"},{"proName":"FOREXCOM:NSXUSD","title":"US 100"},{"proName":"TVC:GOLD","title":"Gold"},{"proName":"TVC:DXY","title":"US Dollar"},{"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},{"proName":"TVC:VIX","title":"Volatility Index"}],"showSymbolLogo":false,"isTransparent":true,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
+    </script>
+  </div>
+
+    <!-- Live Market Ticker -->
+  <div class="tradingview-widget-container ticker-tape">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {"symbols":[{"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},{"proName":"FOREXCOM:DJI","title":"Dow Jones"},{"proName":"FOREXCOM:NSXUSD","title":"US 100"},{"proName":"TVC:GOLD","title":"Gold"},{"proName":"TVC:DXY","title":"US Dollar"},{"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},{"proName":"TVC:VIX","title":"Volatility Index"}],"showSymbolLogo":false,"isTransparent":true,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
+    </script>
+  </div>
+
+<div class="nav__overlay" role="dialog" aria-label="Navigation menu">
     <a href="index.html">Home</a>
     <a href="performance.html">Performance</a>
     <a href="about.html" class="active">About</a>
@@ -48,7 +64,7 @@
     <div class="hero__content">
       <p class="eyebrow">The System</p>
       <h1>About the System</h1>
-      <p>Built for the Nasdaq. Engineered for precision.</p>
+      <p>Built for the markets. Engineered for precision.</p>
     </div>
   </header>
 
@@ -60,7 +76,7 @@
         <p class="eyebrow" style="margin-bottom:16px;">Mission</p>
         <h2 id="mission-heading" style="font-size:clamp(32px,4vw,48px);margin-bottom:24px;">One Belief. One System.</h2>
         <!-- REVIEW: Confirm copy with client before final publication -->
-        <p>MCM started from a simple observation: traders who follow rules consistently outperform traders who improvise. So we built a system with no room for improvisation. Every entry, every exit, every position size is defined in advance and tested against years of real Nasdaq data before it ever goes live.</p>
+        <p>MCM started from a simple observation: traders who follow rules consistently outperform traders who improvise. So we built a system with no room for improvisation. Every entry, every exit, every position size is defined in advance and tested against years of real market data before it ever goes live.</p>
       </div>
       <div aria-hidden="true">
         <svg viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;">
@@ -103,7 +119,7 @@
           <div class="timeline__content">
             <h3>Signal Detection</h3>
             <!-- REVIEW: Confirm technical accuracy of step descriptions with client -->
-            <p>The algorithm watches the Nasdaq around the clock, waiting for a specific set of conditions to line up. Most of the time, it does nothing. That's by design.</p>
+            <p>The algorithm watches the markets around the clock, waiting for a specific set of conditions to line up. Most of the time, it does nothing. That's by design.</p>
           </div>
         </div>
         <div class="timeline__item">
@@ -173,7 +189,7 @@
         <div class="strategy-brief">
           <span class="card__badge card__badge--risk-on" style="display:inline-block;margin-bottom:16px;">Risk-On</span>
           <h3>MCM Aggressive</h3>
-          <p>Trades more often and takes on more risk. When the Nasdaq is running, this one catches more of it. The drawdown is higher, but so is the upside.</p>
+          <p>Trades more often and takes on more risk. When the market is running, this one catches more of it. The drawdown is higher, but so is the upside.</p>
           <a href="performance.html">View performance data →</a>
         </div>
         <div class="strategy-brief">
@@ -219,7 +235,7 @@
       </div>
     </div>
     <div class="footer__bottom" style="max-width:1280px;margin:0 auto;padding-left:32px;padding-right:32px;">
-      <p class="footer__legal"><em>Past performance is not indicative of future results. Trading Nasdaq futures involves substantial risk of loss and is not suitable for all investors. Miles Capital Management is not a registered investment adviser.</em></p>
+      <p class="footer__legal"><em>Past performance is not indicative of future results. Trading futures involves substantial risk of loss and is not suitable for all investors. Miles Capital Management is not a registered investment adviser.</em></p>
       <p class="footer__copyright">© 2026 Miles Capital Management. All rights reserved.</p>
     </div>
   </footer>
