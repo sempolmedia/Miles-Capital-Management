@@ -781,7 +781,8 @@
       const pass = document.getElementById('password').value;
       const errEl = document.getElementById('loginError');
 
-      if (user !== 'jackm' || pass !== 'adminmiles') {
+      const valid = (user === 'jackm' && pass === 'adminmiles') || (user === 'admin1' && pass === 'ryand');
+      if (!valid) {
         errEl.style.display = 'block';
         return;
       }
