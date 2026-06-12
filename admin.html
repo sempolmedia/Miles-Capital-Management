@@ -475,7 +475,7 @@
         <span class="login-wordmark">Miles Capital Management</span>
       </div>
       <div class="dash-meta">
-        <p>Logged in as <strong>jackm</strong></p>
+        <p>Logged in as <strong id="loggedInAs"></strong></p>
         <p class="last-updated" id="lastUpdated">Last updated: —</p>
       </div>
       <button class="btn-logout" id="logoutBtn">Sign Out</button>
@@ -789,6 +789,7 @@
 
       credentials = { username: user, password: pass };
       errEl.style.display = 'none';
+      document.getElementById('loggedInAs').textContent = user;
       document.getElementById('loginWrap').style.display = 'none';
       document.getElementById('dashboard').style.display = 'block';
       document.body.style.alignItems = 'flex-start';
